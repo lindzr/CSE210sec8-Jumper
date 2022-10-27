@@ -1,4 +1,4 @@
-// Ask for difficulty and picks random word from wordbanks
+// picks random word from wordbank
 
 class Words
 {
