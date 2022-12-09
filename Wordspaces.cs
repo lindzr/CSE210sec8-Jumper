@@ -1,43 +1,88 @@
+using System;
 using System.Collections.Generic;
 // sets underscore and space characters for hiddenWord and compares guesses to hiddenWord
 // if letter isn't in hiddenWord, pop index 0 of parachute
-class Wordspaces : Parachute
+class Wordspaces : Person
 {
-    string character = " _";
-    public string Character {get ; set;}
-    string chosenWord =  Words.retrieveWord();
-    string playerGuess = "";
-    List<string> hiddenWord = new List<string>();
+    public string character {get ; set;}
+    string chosenWord {get; set;}
+    List<string> hiddenWordList = new List<string>();
+    List<string> chosenWordList = new List<string>();
 
     // Ask user guess, compare guess to each letter in hidden word, 
     // reveals letter if correct, 
     // removes part of parachute if letter incorrect
     // returns new hidden word
-    public List<string> blankWord()
+    public List<string> MakeChosenWordList() 
     {
-        Console.WriteLine("Please enter your guess (a-z): ");
-        char playerguess = char.Parse(Console.ReadLine());
+        // setup variables: character with "_", chosenWord with Random word, and hiddenWord with characters
         
-        for (int i = 0; i < chosenWord.Length; i++)
+        chosenWord = Words.retrieveWord();
+
+        foreach (char c in chosenWord)
         {
-            hiddenWord[i] = character;
-        
-            if (playerguess == chosenWord[i])
+            chosenWordList.Add(c.ToString());
+        }
+        return chosenWordList;
+    }    
+
+    public void MakeHiddenWordList()
+    {
+      character = "_";
+      
+      foreach ( string i in chosenWordList)
+        {
+            hiddenWordList.Add(character);
+        }
+        foreach (string i in hiddenWordList)
+            {Console.Write(i);} 
+            
+    }
+    public void checkGuess(string playerguess)
+    {
+        for (int i = 0; i < chosenWordList.Count; i++)
+        {
+            if (playerguess == chosenWordList[i])
             {
-                hiddenWord[i] = playerGuess;
+                hiddenWordList[i] = playerguess;
             }
         }
-        
-        if (hiddenWord.Contains(playerGuess))
+        for (int j = 0; j < hiddenWordList.Count; j++)
+            {
+                Console.Write(hiddenWordList[j]);
+            }       
+    }
+
+    public bool ContainsGuess(string playerguess)
+    {
+        if (hiddenWordList.Contains(playerguess))
         {
-            hiddenWord = hiddenWord;
+            return true;
         }
         else
         {
-            parachuteList.RemoveAt(0);
+            return false;
         }
-        
-        return hiddenWord;
     }
 
+    public bool isGameOver(List<string> parachute)
+    {
+        if (parachute.Count == 0)
+        {
+            return true;
+        }
+
+        else if (!hiddenWordList.Contains("_"))
+        {
+            return true;
+        }
+        else if (parachute.Count > 0 && hiddenWordList.Contains("_"))
+        { 
+            return false;
+        }
+        else
+        {
+            return false;
+        }
+    }
 }

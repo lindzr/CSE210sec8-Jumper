@@ -1,25 +1,20 @@
+using System.Collections.Generic;
+
 class Parachute
 {
-     protected List <string> parachuteList = new List <string> {"   ___" , "  /   \\" , "   ___ ", "  \\  /", "   \\ /"};
-
-    public bool HasMoreParachute()
+    List <string> parachuteList = new List<string>(){" ___","/___\\","\\   /"," \\ /"};
+    
+    public List<string> GetParachuteList()
     {
-        List<string> parachute = parachuteList;
+        return parachuteList;
+    }
 
-        int paracount = parachute.Count;
-
-        if (paracount > 0)
+    public void DrawParachute(List<string> parachute)
+    {   
+        Console.WriteLine("");
+        foreach (string i in parachute)
         {
-            for(int i = 0; i < parachute.Count(); i++)
-            {
-                Console.WriteLine(parachute[i]);
-            }
-            return true;
-        }
-
-        else
-        {
-            return false;
+            Console.WriteLine(i);
         }
     }
 }

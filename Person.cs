@@ -1,23 +1,15 @@
-class Person : Parachute
+using System.Collections.Generic;
+
+class Person
 {
-    List<string> personBody = new List<string> {"     O","    /|\\","    / \\","","^^^^^^^"};
-    
-    
-    
-    public void drawBody()
-    {   
-        bool parabool = HasMoreParachute();
-        if (parabool == false)
+    private static string [] personPieces = {"  O"," /|\\"," / \\","","^^^^^^^"};
+    List<string> person = new List<string>(personPieces);
+
+    public void DrawBody()
+    { 
+        foreach (string i in person)
         {
-            personBody[0] = "     X";
+            Console.WriteLine(i);
         }
-
-        foreach (string part in personBody)
-        {
-            Console.WriteLine(part);
-        }
-    }    
-
-        
-
+    }
 }
